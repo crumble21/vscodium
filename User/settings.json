@@ -1,0 +1,159 @@
+// VSCodium — quiet UI profile
+// Portable across Linux (Hyprland), macOS and Windows. Linked into place by install.sh / install.ps1.
+// Edits made through the Settings UI land here too (it's a symlink), so `git diff` shows what changed.
+//
+// Dials worth knowing (all togglable from the Command Palette as well):
+//   Ctrl+K Z            zen mode (hides everything but the editor)
+//   Ctrl+B / Ctrl+J     side bar / panel
+//   Ctrl+Alt (hold)     reveal inlay hints
+//   see keybindings.json for minimap / status bar / breadcrumbs toggles
+{
+    // ==== Window chrome ====
+    // "native" + "never": on Hyprland the compositor draws no decorations, so the window has no
+    // title bar at all. On macOS/Windows you get the OS title bar (with traffic lights / caption buttons).
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never",
+    "window.menuBarVisibility": "toggle",           // hidden until you tap Alt ("compact" needs the custom title bar)
+    "window.commandCenter": false,
+    "window.title": "${rootName}${separator}${activeEditorShort}${dirty}",  // what Hyprland / your bar sees
+    "window.dialogStyle": "custom",                 // themed in-app dialogs instead of GTK/portal pop-ups
+    "window.density.editorTabHeight": "compact",
+    "window.restoreWindows": "none",
+    "workbench.layoutControl.enabled": false,
+    "workbench.browser.showInTitleBar": false,
+
+    // ==== Workbench layout ====
+    "workbench.activityBar.location": "top",        // icons move into the side bar header; "hidden" to remove entirely
+    "workbench.sideBar.location": "left",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "workbench.panel.showLabels": false,            // icon-only panel tabs (Problems/Output/Terminal…)
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false,
+    "workbench.welcomePage.walkthroughs.openOnInstall": false,
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.tree.indent": 12,
+    "workbench.tree.renderIndentGuides": "onHover",
+    "workbench.tree.enableStickyScroll": false,
+    "workbench.list.smoothScrolling": true,
+    "extensions.ignoreRecommendations": true,       // no "this workspace recommends…" toasts
+    "chat.disableAIFeatures": true,                 // hides built-in chat/Copilot surfaces; doesn't affect third-party extensions
+
+    // ==== Tabs ====
+    "workbench.editor.showTabs": "multiple",        // "single" = one breadcrumb-style title, navigate with Ctrl+P / Ctrl+Tab
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.editor.pinnedTabSizing": "compact",
+    "workbench.editor.tabActionCloseVisibility": false,  // no × on tabs (middle-click or Ctrl+W)
+    "workbench.editor.editorActionsLocation": "hidden",  // no split/… icons on the tab strip
+    "workbench.editor.labelFormat": "short",
+    "workbench.editor.restoreEditors": false,       // windows reopen with no tabs
+    "breadcrumbs.enabled": false,
+
+    // ==== Theme ====
+    "workbench.colorTheme": "Dark 2026",
+    // One flat background for every surface and no 1px divider lines. Under Hyprland's opacity + blur this
+    // reads as a single pane of glass instead of a patchwork of slightly different greys.
+    // Scoped to the theme so switching themes doesn't inherit half-applied overrides.
+    "workbench.colorCustomizations": {
+        "[Dark 2026]": {
+            "editor.background": "#16161a",
+            "editorGutter.background": "#16161a",
+            "sideBar.background": "#16161a",
+            "sideBarSectionHeader.background": "#16161a",
+            "activityBar.background": "#16161a",
+            "panel.background": "#16161a",
+            "terminal.background": "#16161a",
+            "statusBar.background": "#16161a",
+            "statusBar.noFolderBackground": "#16161a",
+            "statusBar.debuggingBackground": "#16161a",
+            "statusBar.debuggingForeground": "#e8a33d",
+            "statusBarItem.remoteBackground": "#00000000",
+            "statusBarItem.remoteForeground": "#9d9d9d",
+            "titleBar.activeBackground": "#16161a",
+            "titleBar.inactiveBackground": "#16161a",
+            "editorGroupHeader.tabsBackground": "#16161a",
+            "tab.activeBackground": "#16161a",
+            "tab.inactiveBackground": "#16161a",
+            "tab.hoverBackground": "#1e1e24",
+            "tab.inactiveForeground": "#6e6e78",
+
+            // kill the dividers
+            "titleBar.border": "#00000000",
+            "activityBar.border": "#00000000",
+            "activityBarTop.activeBorder": "#4a9eff",
+            "sideBar.border": "#00000000",
+            "sideBarSectionHeader.border": "#00000000",
+            "panel.border": "#00000000",
+            "statusBar.border": "#00000000",
+            "statusBar.focusBorder": "#00000000",
+            "tab.border": "#00000000",
+            "tab.activeBorderTop": "#00000000",
+            "tab.activeBorder": "#4a9eff",           // thin accent under the active tab instead of above
+            "tab.unfocusedActiveBorder": "#00000000",
+            "editorGroupHeader.tabsBorder": "#00000000",
+            "editorGroupHeader.border": "#00000000",
+            "editorGroup.border": "#ffffff10",       // keep a faint seam between split editors
+            "scrollbar.shadow": "#00000000",
+            "widget.shadow": "#00000040",
+
+            // quieter editor furniture
+            "editorLineNumber.foreground": "#3c3c44",
+            "editorLineNumber.activeForeground": "#9d9d9d",
+            "editorIndentGuide.background1": "#ffffff08",
+            "editorIndentGuide.activeBackground1": "#ffffff20",
+            "editor.lineHighlightBackground": "#00000000",
+            "editor.lineHighlightBorder": "#00000000",
+            "scrollbarSlider.background": "#ffffff12",
+            "scrollbarSlider.hoverBackground": "#ffffff20",
+            "scrollbarSlider.activeBackground": "#ffffff30"
+        }
+    },
+
+    // ==== Editor ====
+    // Font chain falls through to whatever exists on each OS.
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'SF Mono', Menlo, 'Cascadia Code', Consolas, monospace",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 1.6,
+    "editor.fontLigatures": true,
+    "editor.padding.top": 12,
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.renderLineHighlight": "gutter",
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.scrollbar.verticalScrollbarSize": 8,
+    "editor.scrollbar.horizontalScrollbarSize": 8,
+    "editor.scrollBeyondLastLine": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.lightbulb.enabled": "off",              // quick fixes still on Ctrl+.
+    "editor.codeLens": false,
+    "editor.hover.delay": 600,
+    "editor.matchBrackets": "near",
+    "editor.guides.highlightActiveIndentation": true,
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 2,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.smoothScrolling": true,
+
+    // ==== Terminal ====
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'SF Mono', Menlo, 'Cascadia Code', Consolas, monospace",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.smoothScrolling": true,
+    "terminal.integrated.tabs.hideCondition": "singleTerminal",
+    "terminal.integrated.shellIntegration.decorationsEnabled": "never",  // no ●/✕ gutter dots per command
+    "terminal.integrated.stickyScroll.enabled": false,
+    "terminal.integrated.initialHint": false,
+    "terminal.integrated.enablePersistentSessions": false,        // every window starts with a fresh shell: no "History restored" replay
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    // Let the panel-hide chord (pressed by shell/vscodium.zsh) reach VSCodium even when the terminal
+    // has focus, instead of zsh receiving it and printing ";8~".
+    "terminal.integrated.commandsToSkipShell": ["workbench.action.closePanel"],
+
+    // ==== Zen mode ====
+    "zenMode.fullScreen": false,                    // tiling WM: don't fight Hyprland's fullscreen
+    "zenMode.centerLayout": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.showTabs": "none",
+    "zenMode.restore": true
+}

@@ -1,0 +1,16 @@
+// Toggles for the UI the settings hide. Ctrl+K chords on Linux/Windows, Cmd+K on macOS.
+[
+    { "key": "ctrl+k ctrl+m", "command": "editor.action.toggleMinimap",            "when": "!isMac" },
+    { "key": "cmd+k cmd+m",   "command": "editor.action.toggleMinimap",            "when": "isMac" },
+    { "key": "ctrl+k ctrl+b", "command": "workbench.action.toggleStatusbarVisibility", "when": "!isMac" },
+    { "key": "cmd+k cmd+b",   "command": "workbench.action.toggleStatusbarVisibility", "when": "isMac" },
+    { "key": "ctrl+k ctrl+.", "command": "breadcrumbs.toggle",                     "when": "!isMac" },
+    { "key": "cmd+k cmd+.",   "command": "breadcrumbs.toggle",                     "when": "isMac" },
+
+    // Show + focus the terminal panel (creates a terminal if none). Safe to repeat, so the
+    // Hyprland launcher (linux/codium-term) presses it right after a window opens.
+    { "key": "ctrl+alt+shift+f12", "command": "workbench.action.terminal.focus" },
+
+    // Hide the panel. Pressed by the `codium` wrapper in shell/vscodium.zsh after opening a file.
+    { "key": "ctrl+alt+shift+f11", "command": "workbench.action.closePanel" }
+]

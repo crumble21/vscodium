@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Launch VSCodium and land in the terminal panel (Hyprland).
+# Bound to SUPER+SHIFT+N. Passes any arguments through to codium.
+#
+# VSCodium has no "open terminal on startup" setting, so: start it, wait for the new
+# window to take focus, then press the chord bound to workbench.action.terminal.focus
+# in keybindings.json. That command is idempotent, so pressing it a few times while the
+# workbench finishes loading is harmless.
+
+before=$(hyprctl clients -j | jq -r '[.[] | select(.class == "codium") | .address] | join(" ")')
+codium "$@" &
+
+press() {
+    hyprctl eval 'hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL ALT SHIFT", key = "F12", state = "down" }))' >/dev/null
+    hyprctl eval 'hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL ALT SHIFT", key = "F12", state = "up" }))' >/dev/null
+}
+
+for _ in $(seq 1 60); do   # wait up to ~15s for a new window
+    sleep 0.25
+    addr=$(hyprctl activewindow -j | jq -r 'select(.class == "codium") | .address')
+    if [[ -n "$addr" && " $before " != *" $addr "* ]]; then
+        for _ in 1 2 3 4 5 6; do
+            # stop if the user has moved focus elsewhere
+            [[ "$(hyprctl activewindow -j | jq -r .address)" == "$addr" ]] || exit 0
+            press
+            sleep 0.5
+        done
+        exit 0
+    fi
+done
