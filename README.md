@@ -1,5 +1,9 @@
 # VSCodium: quiet UI config
 
+> [!IMPORTANT] 
+> **Agentically Engineered!**  
+> Claude Code was used to create this configuration, install scripts, and documentation
+
 A minimal-chrome, glass-friendly VSCodium setup. Built for Arch + Hyprland and portable to macOS and Windows. It covers the UI only and installs no extensions.
 
 ```
